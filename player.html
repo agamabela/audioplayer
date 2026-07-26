@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lofi Player</title>
+    <link rel="stylesheet" href="player.css" />
+  </head>
+  <body>
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+
+    <main class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-dot"></span>
+          <span>lofi player</span>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="youtube" type="button">YouTube</button>
+          <button class="tab" data-tab="local" type="button">Local MP3</button>
+        </div>
+
+        <div id="panel-youtube" class="panel">
+          <ul id="yt-list" class="tracklist"></ul>
+        </div>
+
+        <div id="panel-local" class="panel hidden">
+          <label class="drop" for="file-input">
+            <span class="drop-icon">&#9835;</span>
+            <span class="drop-title">Add MP3 files</span>
+            <span class="drop-hint">Click to browse, or drop files here</span>
+            <input id="file-input" type="file" accept="audio/*,.mp3" multiple hidden />
+          </label>
+          <p class="folder-note">
+            Bundled files live in the <code>music/</code> folder next to this
+            extension &mdash; list them in <code>music/tracks.json</code>.
+          </p>
+          <ul id="local-list" class="tracklist"></ul>
+        </div>
+      </aside>
+
+      <section class="stage">
+        <!-- YouTube stage — embedded iframe player (auto-plays) -->
+        <div id="yt-stage" class="yt-stage">
+          <iframe
+            id="player"
+            title="YouTube player"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <!-- Local MP3 stage -->
+        <div id="audio-stage" class="audio-stage hidden">
+          <div class="cover">
+            <span class="cover-note">&#9835;</span>
+          </div>
+          <p id="now-playing" class="now-playing">Nothing playing</p>
+          <audio id="audio" controls></audio>
+        </div>
+      </section>
+    </main>
+
+    <script src="player.js"></script>
+  </body>
+</html>

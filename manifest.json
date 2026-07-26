@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Lofi Music Player",
+  "version": "1.3.0",
+  "description": "Play lofi music from YouTube links directly in the popup — no tab needed.",
+  "action": {
+    "default_title": "Lofi Music Player",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "nativeMessaging", "cookies", "offscreen"],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://youtu.be/*",
+    "https://img.youtube.com/*",
+    "https://pipedapi.kavin.rocks/*",
+    "https://piped-api.garudalinux.org/*",
+    "https://api.piped.yt/*",
+    "https://pipedapi.tokhmi.xyz/*",
+    "https://googlevideo.com/*",
+    "https://*.googlevideo.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; media-src 'self' blob: https://*.googlevideo.com https://pipedapi.kavin.rocks https://piped-api.garudalinux.org https://api.piped.yt https://pipedapi.tokhmi.xyz; img-src 'self' https://img.youtube.com data: blob:; connect-src 'self' https://img.youtube.com https://pipedapi.kavin.rocks https://piped-api.garudalinux.org https://api.piped.yt https://pipedapi.tokhmi.xyz https://*.googlevideo.com;"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["player.html", "player.css", "player.js", "offscreen.html", "offscreen.js", "music/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
