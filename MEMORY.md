@@ -1,6 +1,6 @@
 # 🧠 Project Memory Bank
 
-*Last updated: 2026-10-16*
+*Last updated: 2026-10-17*
 
 This file serves as the persistent cross-session and cross-device memory for all projects in this workspace.
 
@@ -100,6 +100,8 @@ The AI agent will immediately read this file and know everything you worked on.
 - **2026-10-16**: Inspected MD.emu in-game gamepad mapping configurations (`Key/Gamepad Input Setup` -> `SHANWAN PS3/PC Gamepad`). Confirmed ShanWan controller is detected as Player 1 with axis and button bindings. Disconnected all wireless ADB connections per user instruction.
 - **2026-10-16**: Resolved RetroArch ShanWan USB gamepad issue on Redmi (`192.168.1.4:5555`). Fixed autoconfig profile name mismatch (`SHANWAN PS3/PC Gamepad` with VID `9571`, PID `1397`), moved profile into app-accessible storage (`/sdcard/Android/data/com.retroarch.aarch64/files/autoconfig/android/`), mapped hardware Start (`105`) and Select (`104`), and created game-specific Genesis Plus GX remap (`Sonic 2.rmp`) binding all face/shoulder buttons to Genesis Jump and Start buttons.
 - **2026-10-17**: Configured standalone PS1 game **Kaettekita Cyborg Kuro-chan** (SLPM-87174) for RetroArch with ShanWan USB joystick support on Redmi (`192.168.1.4:5555`). Extracted ROM (`kaette kita.cue`/`.bin`), deployed official Libretro arm64-v8a `pcsx_rearmed_libretro_android.so` core and ROM to `/sdcard/Download/KuroChan/`, generated custom PCSX ReARMed remaps with `analog_dpad_mode = 1` for full joystick analog + D-pad support, and built standalone one-tap Android launcher APK `Cyborg-Kuro-Chan.apk` (package `local.kurochan.launcher`) with authentic high-res Kuro-chan box art icon deployed to `/sdcard/Download/Cyborg-Kuro-Chan.apk`.
+- **2026-10-17**: Synced cross-device project repository to second laptop (`depanlaptop`, Linux environment) into `/home/depanlaptop/.gemini/antigravity/scratch/audioplayer`. Loaded and verified persistent memory bank (`MEMORY.md`, `AGENTS.md`, `GEMINI.md`). Established local working environment for seamless multi-laptop development.
+
 
 
 
