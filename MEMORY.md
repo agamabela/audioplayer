@@ -274,6 +274,60 @@ The AI agent will immediately read this file and know everything you worked on.
 
 
 
+---
+
+## 📜 Full Conversation History & Technical Changelog
+
+### 1. Genesis / Sonic The Hedgehog 2 Standalone & Joystick Resolution
+- **Goal**: Create a 1-tap dedicated Android launcher for Sonic 2 with full physical joystick control.
+- **Hardware & Environment**:
+  - Tablet: Redmi Pad SE / 25040RP0AG (`192.168.1.4:5555`) running Android 16 (API 36).
+  - Controller: SHANWAN USB PS3/PC Gamepad (Vendor ID: `9571` / `0x2563`, Product ID: `1397` / `0x0575`).
+- **Initial Roadblocks & Solutions**:
+  - *Play Protect / Install Restrictions*: Android 16 rejected silent ADB installs (`INSTALL_FAILED_USER_RESTRICTED`). Transferred `RetroArch-Sonic-Setup.apk` (175 MB) to `/sdcard/Download/` for manual user installation.
+  - *First Launcher Route*: Initial launcher launched basic RetroArch UI rather than the ROM directly. Patched launcher to target `com.retroarch.browser.debug.CoreSideloadActivity` passing explicit extras:
+    - `ROM`: `/sdcard/Download/Sonic2/Sonic 2.gen`
+    - `LIBRETRO`: `/sdcard/Download/Sonic2/genesis_plus_gx_libretro_android.so`
+    - Flags: `0x24000000` (`FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TOP`).
+    - Released: `Sonic-The-Hedgehog-2-Fixed.apk`.
+  - *Gamepad Mismatch & "Shanwan Fallback"*:
+    - Touchpad worked, but physical joystick buttons/axes were unmapped or showed fallback warnings.
+    - Diagnosed RetroArch autoconfig lookup: RetroArch required autoconfig profiles placed in scoped storage `/sdcard/Android/data/com.retroarch.aarch64/files/autoconfig/android/`.
+    - Authored and deployed `SHANWAN_PS3_PC_Gamepad.cfg`:
+      - Device Name: `"SHANWAN PS3/PC Gamepad"` (VID `9571`, PID `1397`).
+      - Face Buttons: B=`96` (A), A=`97` (B), Y=`98` (X), X=`100` (Y).
+      - Menu/Options: Start=`105` (scanCode 313), Select=`104` (scanCode 314).
+      - Shoulders: L1=`102`, R1=`103`, L2=`104`, R2=`105`.
+      - Hat/D-pad: `h0up`, `h0down`, `h0left`, `h0right`.
+      - Left Analog Stick: Axis `0` (X) and Axis `1` (Y).
+    - Game Remap (`Sonic 2.rmp`): Set `analog_dpad_mode = 1` so left analog stick translates to D-pad, and bound action buttons to jump. User confirmed Sonic 2 fully working with the joystick.
+
+### 2. Kaettekita Cyborg Kuro-chan (PS1) Standalone Setup
+- **Goal**: Replicate the standalone launcher and joystick support for the PS1 classic *Kaettekita Cyborg Kuro-chan* (帰ってきた サイボーグクロちゃん - SLPM-87174).
+- **Asset Acquisition & Processing**:
+  - Extracted game archive from user link (`https://www.retrogames.cc/psx-games/kaettekita-cyborg-kuro-chan.html`) into `kaette kita.cue` (77 bytes) and `kaette kita.bin` (25.9 MB).
+  - Fetched official 64-bit ARM core: `pcsx_rearmed_libretro_android.so` (arm64-v8a) from libretro buildbot.
+  - Deployed game files and core to `/sdcard/Download/KuroChan/`.
+- **Core & Controller Configuration**:
+  - Verified PCSX ReARMed HLE BIOS boots `SLPM_871.74;1` directly.
+  - Deployed custom remaps (`PCSX-ReARMed.rmp` and `kaette kita.rmp`) enabling `input_player1_analog_dpad_mode = "1"`.
+  - Buttons mapped 1:1 with PS1 Retropad: Cross/A = Jump, Circle/B = Shoot, Square/X = Attack, Triangle/Y = Switch Weapon, Start = Pause/Start.
+  - Captured test gameplay screenshots confirming full 60 FPS rendering and HUD active.
+- **Dedicated Android Launcher APK**:
+  - Package: `local.kurochan.launcher`
+  - Activity: `local.kurochan.launcher.KurochanLauncherActivity`
+  - App Name: `Cyborg Kuro-chan`
+  - Custom Icon: Extracted official Japanese cover art from PSX Data Center, processed via macOS `sips` into multi-dpi mipmap drawables (`mdpi`, `xhdpi`, `xxhdpi`, `xxxhdpi`).
+  - Smali Architecture: Launches `CoreSideloadActivity` targeting `/sdcard/Download/KuroChan/kaette kita.cue` and core `/sdcard/Download/KuroChan/pcsx_rearmed_libretro_android.so`, then finishes.
+  - Built with `apktool 2.10.0`, aligned with `zipalign`, and signed with debug keystore (`apksigner`).
+  - Deployed to `/sdcard/Download/Cyborg-Kuro-Chan.apk`.
+
+### 3. Repository Synchronization
+- **Git Repository**: `https://github.com/agamabela/audioplayer.git`
+- **Tracked Memory File**: `MEMORY.md`
+- **Sync Command**: `git add AGENTS.md GEMINI.md MEMORY.md && git commit -m "..." && git push origin main`
+- **Other Devices**: Pull updates via `git pull origin main`.
+
 
 
 
