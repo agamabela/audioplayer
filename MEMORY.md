@@ -104,25 +104,116 @@ The AI agent will immediately read this file and know everything you worked on.
 
 ---
 
-## 📜 Detailed Session History & Conversations
+## 📜 Detailed History of Conversations & Projects (Past 30 Days)
 
-### Session: 2026-10-17 (Cross-Laptop Sync & Memory Setup on `depanlaptop`)
-- **Initial User Prompt**:
-  - Request: `"git pull on my github agamabela/audioplayer the file memory.md is in github.com/agamabela/audioplayer/blob/main/MEMORY.md"`
-  - Objective: Ingest `MEMORY.md` to rehydrate full agent context from previous laptop sessions.
-- **System Investigation & Actions**:
-  1. **Filesystem Audit**: Checked `/home/depanlaptop` and scratch directories for existing copies of `audioplayer`. No existing clone found.
-  2. **Remote Verification**: Checked `https://github.com/agamabela/audioplayer.git` via `git ls-remote` (HEAD commit `fffa635`).
-  3. **Clone & Placement**: Cloned `https://github.com/agamabela/audioplayer.git` into `/home/depanlaptop/.gemini/antigravity/scratch/audioplayer`.
-  4. **Context Restored**: Read `MEMORY.md`, `AGENTS.md`, and `GEMINI.md`. Successfully restored context across all active projects:
-     - *Lofi Music Player* (Chrome MV3 extension + Python native host `host/lofi_downloader.py`).
-     - *Kavling SaaS* (`kavling-saas/` Next.js + Prisma).
-     - *Rubik's Cube Solver* (`rubik/` Three.js).
-     - *WordPress Malware Scanners* (`wp_*_scan.py`).
-     - *Android TV Micro-Server* (`192.168.1.25` via Termux, ADB, Nginx reverse proxy, TV remote daemon, 24/7 live stream).
-     - *Recent Game Emulation Work*: Sonic 2 Sega Genesis custom APK & Kuro-chan PS1 standalone launcher for Redmi (`192.168.1.4`) with ShanWan USB gamepad mapping.
-  5. **Git Setup**: Configured local git user `agamabela <agamabela@gmail.com>` in `/home/depanlaptop/.gemini/antigravity/scratch/audioplayer` to facilitate seamless commits and memory updates.
-  6. **Memory Ingestion**: Updated `MEMORY.md` with session summary and full conversational history per user request to maintain unbroken memory continuity across laptops.
+### 1. YouTube Channel Downloader Desktop App (2026-10-14 — 2026-10-15)
+- **Session ID**: `7097d0b7-9d5e-4a64-a4b9-dd91d2fff489`
+- **Location**: `/home/depanlaptop/.gemini/antigravity/scratch/youtube-channel-downloader`
+- **What Was Built**:
+  - Full native Desktop GUI application (Python / Tkinter) wrapping `yt-dlp`.
+  - Scans entire YouTube channels, lists videos with metadata (titles, durations, views), and allows selective or batch downloading of video (MP4) or audio (MP3).
+  - Multi-threaded download manager with live visual progress bars, cancel/resume support, and directory selection.
+  - Launcher: `./run.sh`.
+
+### 2. Stardew Valley GOG Linux Mint Installation (2026-10-09)
+- **Session ID**: `d2c93d32-46d1-4679-8261-69d526345d8e`
+- **User Request**: Install Stardew Valley on Linux Mint using an Arch AUR package link.
+- **Resolution**:
+  - Clarified why Arch AUR PKGBUILDs cannot be directly installed on Debian/Ubuntu-based Linux Mint.
+  - Extracted game assets using GOG Linux native installer (`gog_stardew_valley_*.sh` / `innoextract`), configured Mono/FNA runtime dependencies, and created desktop shortcut.
+
+### 3. Fullscreen Overlay & Modal Ad Blocker Extension (2026-10-05)
+- **Session ID**: `300aa08c-c79c-40d3-84c1-32abd61b6e24`
+- **Location**: `/home/depanlaptop/.gemini/antigravity/scratch/fullscreen-ad-blocker`
+- **What Was Built**:
+  - Firefox WebExtension specifically designed to destroy full-screen invisible click-hijack divs, anti-adblock modals, and JavaScript popup redirect loops.
+  - MutationObserver script that scans DOM for `position: fixed; z-index: >9999` overlays blocking `pointer-events` or scrolling, restores `overflow: auto` on `<body>`/`<html>`, and neuters `window.open` traps.
+  - Resolved browser tab freezing by throttling DOM mutation checks.
+
+### 4. Family Finance Telegram Bot with AI Understanding (2026-10-01 — 2026-10-02)
+- **Session ID**: `e5865763-727d-4d5b-8fd3-c54a64ffdeb6`
+- **Location**: `/home/depanlaptop/.gemini/antigravity/scratch/family-finance-bot`
+- **What Was Built**:
+  - Python Telegram Bot for collaborative family finance and daily expense tracking.
+  - Integrated Google Gemini AI to parse free-form natural language messages in Indonesian (e.g. *"beli beras 50rb di warung"*, *"bayar listrik 250k"*).
+  - SQLite database storing transactions, income, expense categories, and monthly budgets.
+  - Automatic voice note transcription & receipt breakdown parsing.
+  - Interactive commands: `/rekap`, `/saldo`, `/kategori`, `/bantuan`.
+
+### 5. Telegram Mobile Context & Journal Companion (2026-09-30 — 2026-10-01)
+- **Session ID**: `477f08a8-c1e0-4ef4-a09c-95621fe4fa54`
+- **Location**: `/home/depanlaptop/.gemini/antigravity/scratch/telegram-journal-bot`
+- **What Was Built**:
+  - Mobile-to-workstation context bridge: Telegram bot allowing user to send links, notes, images, and code snippets from mobile (iOS/Android) directly into their workstation context.
+  - Built local web dashboard to view, tag, and search captured notes.
+
+### 6. ShanWan USB Gamepad D-pad Axis Remapping (2026-09-27)
+- **Session ID**: `6c792a01-65b2-4135-9f87-7cebcd0585b2`
+- **Problem**: ShanWan USB controller (Xbox 360 clone) had inverted D-pad directions on Linux (pressing Up triggered Down, inverted horizontal axis).
+- **Resolution**:
+  - Identified driver/kernel axis inversion in `xpad` / generic USB HID driver.
+  - Mapped physical axes using `evtest` / `jstest`.
+  - Created custom SDL game controller mapping string and system udev rule to normalize analog hat and D-pad input across emulators.
+
+### 7. Soundcore Q20i Bluetooth & Linux Mint Audio Fixes (2026-09-18, 2026-09-23, 2026-09-26)
+- **Session IDs**: `45cc620a`, `a511c446`, `3cdfee1f`
+- **Problems**: "No input device" error on laptop, missing audio, Discord error 3002, Soundcore Q20i headphones disconnecting or stuck in low-quality mono HSP/HFP profile.
+- **Resolution**:
+  - Restarted PipeWire / WirePlumber audio daemon subsystem:
+    `systemctl --user restart wireplumber pipewire pipewire-pulse`
+  - Fixed ALSA card indexing and default sink routing to Intel HDA / Bluetooth.
+  - Configured Bluetooth audio profile switching so Soundcore Q20i locks to A2DP high-fidelity stereo sink for playback.
+
+### 8. Android TV YouTube 24/7 Live Stream Recovery (2026-09-25)
+- **Session ID**: `cb189466-8f61-4153-ac27-ae2be16005ca`
+- **Target**: Android TV Micro-Server (`192.168.1.25`)
+- **Action**:
+  - Inspected background live stream service on the Android TV (`start1.sh` / `start2.sh`).
+  - Fixed audio conversion for `YTDown.com` MP3 files, generated continuous looping video feed, and restored uninterrupted stream transmission.
+
+### 9. Linux Mint APT Download Speed Optimization (2026-09-24)
+- **Session ID**: `b33ea2a2-02f0-4967-801b-3c2c060e2156`
+- **Problem**: Linux Mint Update Manager took excessively long to download packages like Firefox.
+- **Resolution**:
+  - Identified IPv6 DNS lookup stalls and slow Indonesian mirror latency.
+  - Forced IPv4 in APT: `echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4`
+  - Switched to fastest synchronized regional mirrors.
+
+### 10. Kindle 11th Gen Jailbreak Analysis & Native Manga Sync Pipeline (2026-09-23)
+- **Session ID**: `ac21c5a9-bcef-47e7-b71d-01f8cb07c2f0`
+- **Location**: `/home/depanlaptop/kindle_diy` & `/home/depanlaptop/Downloads`
+- **Actions**:
+  - Analyzed Kindle 11th Gen running firmware `5.19.2.0.1` (firmware >= 5.16.x has patched software jailbreaks like LanguageBreak).
+  - Developed alternative zero-jailbreak workflow: built automated batch manga converter (`kindle_tools.py`, `sync_manga_to_kindle.py`, `sync_mobi_to_kindle.py`).
+  - Converted complete 16 volumes of *The Law of Ueki* into high-resolution native Kindle mobi/azw3 with proper metadata, reading direction, and cover art, synced over USB.
+
+### 11. Redmi Watch 5 Active Modification Assessment (2026-09-23 — 2026-09-24)
+- **Session ID**: `5b600775-4f06-449c-9087-623f8ee5d099`
+- **Assessment**: Analyzed Redmi Watch 5 Active hardware & firmware. Because it runs lightweight proprietary RTOS (not full Android Wear OS), traditional Android ADB/rooting/jailbreaking is physically impossible; documented customization options via official watch face APIs.
+
+### 12. MintubeLite Repair & Antigravity Desktop Launcher (2026-09-15 — 2026-09-16)
+- **Session IDs**: `934e62e9`, `9bc88a54`
+- **Location**: `/home/depanlaptop/mintube-lite`
+- **Actions**:
+  - Diagnosed startup error in `mintube-lite` (lightweight YouTube audio/video player). Corrected dependencies and launcher script.
+  - Created standard FreeDesktop `.desktop` entry and icon integration for Antigravity in Linux Mint XFCE dock/panel.
+
+### 13. Mobile Personalization & Android Game Emulation Experiments (2026-09-16)
+- **Session IDs**: `833aa16d`, `1936011d`, `4233b024`
+- **Actions**:
+  - Diagnosed Xiaomi phone setting accessibility issue at `192.168.1.16`.
+  - Explored running Angry Birds 2 on Linux Mint via lightweight Android runtimes (Waydroid / Anbox) without heavy virtualization.
+  - Brainstormed development roadmaps for personal utilities.
+
+### 14. Cross-Laptop Sync & Memory Integration (2026-10-16 — 2026-10-17)
+- **Session IDs**: `128bc05a`, `01da096a`
+- **Location**: `/home/depanlaptop/.gemini/antigravity/scratch/audioplayer`
+- **Actions**:
+  - Cloned GitHub repo `https://github.com/agamabela/audioplayer.git` onto `depanlaptop`.
+  - Ingested persistent memory bank (`MEMORY.md`, `AGENTS.md`, `GEMINI.md`).
+  - Configured git author `agamabela <agamabela@gmail.com>`.
+  - Archived full 30-day conversational history into `MEMORY.md` to ensure zero context degradation across devices.
+
 
 
 
