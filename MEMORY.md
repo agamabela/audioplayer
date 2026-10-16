@@ -104,7 +104,7 @@ The AI agent will immediately read this file and know everything you worked on.
 
 ---
 
-## 📜 Detailed History of Conversations & Projects (Past 30 Days)
+## 📜 Complete History of Conversations & Projects (Day 1 to Present)
 
 ### 1. YouTube Channel Downloader Desktop App (2026-10-14 — 2026-10-15)
 - **Session ID**: `7097d0b7-9d5e-4a64-a4b9-dd91d2fff489`
@@ -212,7 +212,64 @@ The AI agent will immediately read this file and know everything you worked on.
   - Cloned GitHub repo `https://github.com/agamabela/audioplayer.git` onto `depanlaptop`.
   - Ingested persistent memory bank (`MEMORY.md`, `AGENTS.md`, `GEMINI.md`).
   - Configured git author `agamabela <agamabela@gmail.com>`.
-  - Archived full 30-day conversational history into `MEMORY.md` to ensure zero context degradation across devices.
+  - Archived complete conversational history from Day 1 to ensure zero context degradation across devices.
+
+### 15. MintubeLite Lightweight YouTube Music Player (2026-09-15 — 2026-09-16)
+- **Thread ID**: `01a0a6d9-77c8-74b1-ad04-6b1aef02aa69`
+- **Location**: `/home/depanlaptop/mintube-lite` & `/home/depanlaptop/Documents/Codex/2026-09-16/c/outputs/mintube-lite`
+- **User Prompt**: *"can you create apps for linux mint that lightweight and can play music youtube url or find it them selvese from youtube"*
+- **What Was Built**:
+  - Lightweight standalone music player for Linux Mint with native Python/Qt frontend.
+  - Integrates YouTube search, streaming playback, and local caching.
+  - Formed the desktop counterpart to the Chrome MV3 Lofi extension.
+
+### 16. ZTE Android TV ADB Root & iPhone Web Remote Server (2026-09-14)
+- **Thread IDs**: `01a0a03a`, `01a0a043`
+- **Target**: ZTE Android TV Box on LAN (`192.168.1.25`)
+- **User Problem**: Physical TV remote was lost; needed a quick way to control the TV from an iPhone and debloat system apps.
+- **Resolution**:
+  - Connected via ADB over Wi-Fi (`adb connect 192.168.1.25:5555`) and elevated to root (`adb root`).
+  - Audited and debloated vendor telemetry/carrier packages (`tvbox-packages-before.txt`).
+  - Built Python HTTP remote server on port 8080 (`server.py`) using `/dev/input/event*` hardware injection, allowing any iOS/mobile web browser on the Wi-Fi network to serve as a high-precision trackpad and remote control.
+
+### 17. Headphone Audio Troubleshooting (2026-09-12 — 2026-09-13)
+- **Thread ID**: `01a096ac-66bd-7d90-b1e9-8cf197c1b9bd`
+- **User Prompt**: *"fix the audio for my headphone, seems something off"*
+- **Resolution**: Diagnosed initial Linux Mint PipeWire/ALSA sink routing issues, fixed sample rate mismatch, and configured clean stereo audio output.
+
+### 18. Waydroid Setup for Android APKs & Gaming (2026-09-09)
+- **Thread ID**: `01a0862f-645e-76c3-b135-b3fc30bd05aa`
+- **User Prompt**: Setting up and running Android games (Angry Birds 2) on Linux Mint.
+- **Resolution**: Configured Waydroid container environment, resolved binder/ashmem kernel module requirements, and set up Houdini ARM translation layer (`install-houdini`).
+
+### 19. Firefox YouTube Media Downloader Extension (2026-09-07 — 2026-09-08)
+- **Thread ID**: `01a07d6b-f211-7092-a99e-ceaec427e6fd`
+- **User Prompt**: Linux IDM (Internet Download Manager) alternative for capturing and downloading media in Firefox.
+- **Resolution**: Built a Firefox WebExtension communicating via Native Messaging to Python `yt-dlp` scripts for one-click audio and video downloads.
+
+### 20. Conky System Monitor & First Kindle Book Sync (2026-08-31)
+- **Thread IDs**: `01a05767`, `01a059ba`
+- **Actions**:
+  - Configured Conky system HUD (`~/.config/conky/`) to monitor network throughput, CPU core loads, and RAM on Linux Mint.
+  - Transferred *George R.R. Martin Starter Pack (4-Book Bundle A Game of Thrones)* EPUB/MOBI directly to the connected Kindle reader.
+
+### 21. Developer Toolchain & NVM Environment Setup (2026-08-29)
+- **Thread ID**: `01a049b0-e1cd-7991-972a-b1b91e9a3231`
+- **Actions**: Installed Node.js via NVM (`~/.nvm`), Python 3 developer tools, Git, and essential CLI utilities for development on Linux Mint.
+
+### 22. Linux Mint macOS-Theming & UI Customization (2026-08-28)
+- **Thread IDs**: `01a04860`, `01a048b9`, `01a048df`
+- **User Prompt**: *"can you do something on my linux so it look cool? since I have macos i want to try number 4"*
+- **Resolution**:
+  - Researched Mac utilities (`tw93/mole`) and Linux system cleaners (`tuxcleaner`).
+  - Restyled Linux Mint XFCE interface with macOS-style minimalism: customized panel transparency, configured floating bottom dock, customized launcher icons, and removed heavy taskbar borders.
+
+### 23. Initial Laptop Setup & Steam Process Hang Troubleshooting (2026-08-25 — 2026-08-26)
+- **Thread ID**: `01a03e6d-4e86-7ab3-8290-b1c311ec01df`
+- **Timestamp**: System install date: *2026-08-25 22:08:17*.
+- **User Prompt**: First session on this machine — troubleshooting hanging Steam processes on Linux Mint.
+- **Resolution**: Investigated zombie / hanging game processes, taught process management (`kill`, `killall`, `pkill`), and resolved Steam library compatibility issues.
+
 
 
 
