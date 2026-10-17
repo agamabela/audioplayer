@@ -72,7 +72,9 @@ The AI agent will immediately read this file and load complete context on all pr
 
 ### 5. Dedicated Standalone RetroArch Android Launchers
 - **Target Device**: Redmi Pad SE (`25040RP0AG`, `192.168.1.4:5555`) running Android 16
-- **Hardware Controller**: SHANWAN USB PS3/PC Gamepad (VID `9571`, PID `1397`)
+- **Hardware Controller**: Dual-mode USB Gamepad (ShanWan / Xbox 360 compatible):
+  - **DInput / PS3 Mode**: `SHANWAN PS3/PC Gamepad` (VID `9571`, PID `1397`)
+  - **XInput / Xbox Mode**: `Microsoft X-Box 360 pad` (VID `1118` / `0x045e`, PID `654` / `0x028e`)
 - **Deployed Applications**:
   - **Sonic The Hedgehog 2**: Custom APK (`SonicTheHedgehog2.apk`, package `com.retroarch.browser.debug`) bundling Genesis Plus GX core and ROM with custom autoconfig.
   - **Kaettekita Cyborg Kuro-chan**: Custom launcher APK (`Cyborg-Kuro-Chan.apk`, package `local.kurochan.launcher`) bundling PS1 PCSX ReARMed core, cue/bin assets, and analog D-pad remapping.
@@ -715,4 +717,14 @@ The AI agent will immediately read this file and load complete context on all pr
   > *"record all of our conversation from the beginning or antigravioty, i see it way back more than 2 month ago to memory.md"*
 - **Technical Implementation**: Executed complete extraction and documentation of all 60 Antigravity conversations from Day 1 (June 16, 2026) to present (October 17, 2026). Replaced incomplete Codex logs with authentic Antigravity history across all apps, servers, scripts, and hardware configurations.
 - **Key Outcome & Deliverable**: Definitive, exhaustive master memory bank established and synchronized.
+
+#### Conversation #61: Resolving Xbox 360 Fallback Mode on Android
+- **Date**: `2026-10-17` | **ID**: `c5027bb4-91cf-4e04-8c1c-0e9dd15b2158` | **Execution Steps**: Current
+- **Target System / Project**: `RetroArch Dual-Mode Gamepad (Kuro-chan & Sonic 2)`
+- **Workspace**: `Redmi Pad SE (`192.168.1.4:5555`)`
+- **User Inquiries & Requests**:
+  > *"now when i want to play kuro or sonic the joystick is not working and it showing microsoft xbox not configure fallback bla bla bla"*
+- **Technical Implementation**: Root cause diagnosed — the USB controller toggled to XInput / Xbox 360 mode (`045e:028e` / `1118:654`), causing RetroArch on Android to throw `[Autoconf] Microsoft X-Box 360 pad (1118/654) not configured, using fallback`. Authored and deployed `Microsoft_XBOX_360_Controller.cfg` into RetroArch autoconfig storage (`/sdcard/Android/data/com.retroarch.aarch64/files/autoconfig/`). Verified in logcat: `[Autoconf] Xbox 360 Controller configured in port 1.` Both DInput (PS3) and XInput (Xbox 360) modes are now completely supported seamlessly across both games.
+- **Key Outcome & Deliverable**: 100% plug-and-play joystick compatibility in both controller modes without ever falling back to unconfigured state.
+
 
